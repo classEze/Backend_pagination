@@ -1,0 +1,33 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paginated View</title>
+</head>
+<body>
+    <h3> <%= message %> </h3>
+      
+    <h4> All fetched posts </h4>
+
+
+    <% data.dataRows.forEach(function(eachRow) { %>
+    <p> <%= eachRow.unique_member_id %> </p>
+    <% }) %>
+    <a href="/members?page=<%=data.page-1%>&size=<%=data.size%>">Previous Page</a>
+    <% for(i=data.firstLinkIndex; i<= data.lastLinkIndex; i++) {
+        if(i==data.page) { %>
+        <a href="/members?page=<%=i%>&size=<%=data.size%>" style="background:red">Page <%= i %></a>
+            <% continue; %>
+            <% } %>
+        <a href="/members?page=<%=i%>&size=<%=data.size%>" style="background:blue">Page <%= i %></a>
+        <% } %>
+        <a href="/members?page=<%=data.page+1%>&size=<%=data.size%>">Next Page</a>
+
+
+    <p>Showing <%= data.size %> of <%= data.totalCount %> members </p>
+    <p> Total <%= data.totalPages %> pages</p>
+
+
+</body>
+</html>
